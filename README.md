@@ -13,8 +13,7 @@ This will create a directory called csc432-notebooks in that folder. If you want
 
     git clone git://github.com/jseabold/csc432-notebooks other-name
 
-To keep up to date with the changes in this repository, you're going to want to
-*fetch* the changes that I make and put up on github.
+To keep up to date with the changes in this repository, you're going to want to *fetch* the changes that I make and put up on github. You do this from the folder you just created. This is your new repository.
 
     git fetch origin
 
