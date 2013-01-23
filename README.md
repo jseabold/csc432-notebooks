@@ -29,7 +29,7 @@ You will, however, want to be able to play with these. The easiest way to do thi
 Creating a Notebook Profile
 ---------------------------
 
-First you have to create a profile if you want to be able to edit it to point to the directory which contains your notebooks. To do this, run the command
+First you have to create a profile if you want to be able to edit it to point to the directory that contains your notebooks. To do this, run the command
 
     ipython profile create your-profile-name
 
@@ -42,6 +42,6 @@ Or at the command prompt type
 
     ipython locate
 
-Now when you want to start the Notebook server with this profile, just type
+Copy the provided file over the one that was automatically created. Now when you want to start the Notebook server with this profile, just type
 
     ipython notebook --profile=your-profile-name
