@@ -23,7 +23,7 @@ Then merge these changes into your local copy.
 
 **Note:** I do not recommend making any changes to these files. They are saved with the output cleared. So, for instance, if you run the notebooks from this directory or make changes and save them, you can run into problems when trying to merge from github. There could be a *conflict* between the remote changes and your local changes.
 
-You will, however, want to be able to play with these. The easiest way to do this is to put these notebooks into another directory and add that directory to you IPython Notebook profile for this class.
+You will, however, want to be able to play with these. The easiest way to do this is to put these notebooks into another directory and add that directory to you IPython Notebook profile for this class. See below for an easy solution on how to automate this.
 
 Creating a Notebook Profile
 ---------------------------
@@ -44,3 +44,52 @@ Or at the command prompt type
 Copy the provided file over the one that was automatically created. Now when you want to start the Notebook server with this profile, just type
 
     ipython notebook --profile=your-profile-name
+
+
+Staying Up to Date
+------------------
+
+Tired of copying over the notebooks after updating them with git? This is good. A good programmer is a lazy programmer. You should write a script to automate this.
+
+### OS X and Linux Shell Script
+
+    #!/bin/sh
+    
+    cur_dir=`pwd`
+    repo_dir='/home/skipper/school/csc432/csc432-notebooks/' # read only
+    dest_dir='/home/skipper/school/csc432/my-notebooks/' # can make changes
+    
+    cd $repo_dir
+    git fetch origin
+    git merge origin/master --ff-only
+    cp -r $repo_dir* $dest_dir
+    cd $cur_dir
+
+Save this to a file called `update_notebooks.sh`. You need to make this file `executable`, so you need to do at the command prompt
+
+    chmod +x update_notebooks.sh
+
+Whenever you want to update the notebooks, you just go to the directory that contains this script and type
+
+    ./update_notebooks.sh
+
+That's it.
+
+### Windows Batch File
+
+    @echo off
+    
+    set cur_dir=%cd%
+    set repo_dir=C:\Users\skipper\school\csc432\notebooks
+    set dest_dir=C:\Users\skipper\school\csc432\my-notebooks
+    
+    chdir /D %repo_dir%
+    
+    call git fetch origin master
+    call git merge origin/master --ff-only
+    
+    chdir /D %cur_dir%
+    
+    xcopy /s /v %repo_dir% %dest_dir%
+
+On Windows, scripts that you want to run at the command prompt are called batch files. Copy the above to a text file called `update_notebooks.bat`. Whenever you want to update the notebooks, just double-click on it or type the name of the batch file at the command prompt in the directory where it is.
