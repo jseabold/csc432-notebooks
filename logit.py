@@ -10,4 +10,4 @@ def logit_loglikelihood(beta, y, X):
 def logit_score(beta, y, X):
     q = 2*y - 1
     L = logit_func(np.dot(X, beta))
-    return np.dot(y - L, X)
+    return -np.dot(y - L, X)
